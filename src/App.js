@@ -5,31 +5,33 @@ function App() {
   const [startLocation, setStartLocation] = useState('');
   const [endLocation, setEndLocation] = useState('');
   const [totalDistance, setTotalDistance] = useState(null);
+  const [error, setError] = useState(null);
 
   const calculateDistance = async () => {
-    if (startLocation.trim() === '' || endLocation.trim() === '') {
-      alert('Please enter both start and end locations.');
-      return;
-    }
-
-    // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
-    const apiKey = 'AIzaSyBuPLiP883h0jU2rcnE1g7_RZ5Bpc9X5m8';
-
     try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`
-      );
+      if (!startLocation.trim() || !endLocation.trim()) {
+        setError('Please enter both start and end locations.');
+        return;
+      }
+
+      // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
+      const apiKey = 'AIzaSyBDby7WmE2d8hmnLUK5pK5qTUQKCVCeTDE';
+      const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`;
+      
+      const response = await fetch(apiUrl);
       const data = await response.json();
 
       if (data.status === 'OK') {
         const distanceInMeters = data.rows[0].elements[0].distance.value;
         const distanceInMiles = distanceInMeters * 0.000621371; // Convert meters to miles
         setTotalDistance(distanceInMiles.toFixed(2));
+        setError(null);
       } else {
-        alert('Error calculating distance. Please try again.');
+        setError('Error calculating distance. Please check your locations and try again.');
       }
     } catch (error) {
       console.error('Error fetching data:', error);
+      setError('An error occurred while fetching data. Please try again.');
     }
   };
 
@@ -57,6 +59,7 @@ function App() {
         </label>
       </div>
       <button onClick={calculateDistance}>Calculate Distance</button>
+      {error && <div className="error">{error}</div>}
       {totalDistance !== null && (
         <div>
           <h2>Total Distance: {totalDistance} miles</h2>
@@ -67,6 +70,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
