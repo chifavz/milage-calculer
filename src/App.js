@@ -6,6 +6,7 @@ function App() {
   const [endLocation, setEndLocation] = useState('');
   const [totalDistance, setTotalDistance] = useState(null);
   const [error, setError] = useState(null);
+  
 
   const calculateDistance = async () => {
     try {
@@ -15,7 +16,7 @@ function App() {
       }
 
       // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
-      const apiKey = '';
+      const apiKey = process.env.REACT_APP_API_KEY;
       const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`;
       
       const response = await fetch(apiUrl);
