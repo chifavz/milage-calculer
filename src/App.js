@@ -14,7 +14,7 @@ function App() {
         setError('Please enter both start and end locations.');
         return;
       }
-
+ 
       // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
       const apiKey = process.env.REACT_APP_API_KEY;
       const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`;
