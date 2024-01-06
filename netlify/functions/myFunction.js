@@ -1,7 +1,7 @@
 // netlify/functions/googleMapsProxy.js
 import fetch from 'node-fetch';
 
-export async function handler (event, _context) {
+export async function handler(event, _context) {
   try {
     const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
     const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json${event.body}&key=${apiKey}`;
@@ -13,8 +13,8 @@ export async function handler (event, _context) {
       body: JSON.stringify(data),
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -24,10 +24,8 @@ export async function handler (event, _context) {
       body: JSON.stringify({ error: 'Internal Server Error' }),
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     };
   }
 }
-
-  
