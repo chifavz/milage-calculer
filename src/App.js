@@ -17,7 +17,7 @@ function App() {
  
       // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
       const apiKey = process.env.REACT_APP_API_KEY;
-      const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`;
+      const apiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${startLocation}&destinations=${endLocation}&key=${apiKey}`;
       
       const response = await fetch(apiUrl);
       const data = await response.json();
