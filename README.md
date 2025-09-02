@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Mileage Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application for calculating distances between two locations using the Google Maps Distance Matrix API.
+
+## Features
+
+- Calculate driving distance between any two locations
+- Real-time input validation
+- Loading states and comprehensive error handling
+- Responsive design
+- Conversion from metric to imperial units (miles)
+
+## Prerequisites
+
+Before running this application, you need:
+
+1. **Node.js** (version 14 or higher)
+2. **Google Maps API Key** with Distance Matrix API enabled
+
+## Setup
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/chifavz/milage-calculer.git
+cd milage-calculer
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the root directory and add your Google Maps API key:
+
+```env
+REACT_APP_API_KEY=your_google_maps_api_key_here
+```
+
+**Important Security Note**: 
+- For production deployments, consider using the Netlify function proxy instead of direct API calls
+- Set up API key restrictions in the Google Cloud Console
+- Use environment variables for the Netlify function: `GOOGLE_MAPS_API_KEY`
+
+### 4. Enable Google Maps APIs
+
+In the Google Cloud Console:
+1. Enable the **Distance Matrix API**
+2. Create an API key
+3. (Optional) Set up API key restrictions for security
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000)
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner with comprehensive unit tests
 
 ### `npm run build`
+Builds the app for production to the `build` folder
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Netlify Deployment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This app includes Netlify Functions for secure API proxy usage:
 
-### `npm run eject`
+1. Connect your repository to Netlify
+2. Set environment variable: `GOOGLE_MAPS_API_KEY=your_api_key`
+3. Build command: `npm run build`
+4. Publish directory: `build`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Security Considerations
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- API keys are kept secure through environment variables
+- Input validation prevents injection attacks
+- Proper error handling protects against information disclosure
+- The Netlify function provides a secure proxy for API calls
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Enter a starting location (address, city, or landmark)
+2. Enter a destination location
+3. Click "Calculate Distance"
+4. View the distance result in miles
 
-## Learn More
+## Error Handling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application handles various error scenarios:
+- Empty input fields
+- Invalid locations
+- Network connectivity issues
+- API key configuration problems
+- No route available between locations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
 
-### Code Splitting
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## License
 
-### Analyzing the Bundle Size
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Technical Details
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Frontend**: React 18 with functional components and hooks
+- **Styling**: CSS3 with responsive design
+- **Testing**: Jest and React Testing Library
+- **API**: Google Maps Distance Matrix API
+- **Deployment**: Optimized for Netlify with serverless functions
